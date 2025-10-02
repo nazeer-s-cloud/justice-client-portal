@@ -1,0 +1,911 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justice Law Firm - Committed to Success</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1a237e;
+            --secondary: #c8a951;
+            --dark: #121212;
+            --light: #f8f9fa;
+            --accent: #3949ab;
+            --notification: #ff5252;
+            --notification-gradient: linear-gradient(135deg, #ff5252 0%, #ff8675 100%);
+        }
+        
+        body {
+            background-color: var(--light);
+            font-family: 'Montserrat', sans-serif;
+            color: #333;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .navbar {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.2);
+            padding: 15px 0;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(18, 18, 18, 0.85), rgba(18, 18, 18, 0.9)), 
+                        url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 120px 0;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--primary));
+            z-index: 2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .display-3 {
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
+        }
+        
+        .hero-badge {
+            background: var(--secondary);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(26, 35, 126, 0.4);
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+        }
+        
+        .btn-outline-light {
+            border: 2px solid white;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+        }
+        
+        .feature-card {
+            transition: all 0.4s ease;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card-img-top {
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card-body {
+            padding: 25px;
+        }
+        
+        .card-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .stats-section {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 70px 0;
+            margin: 60px 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: white;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            display: block;
+            margin-bottom: 12px;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-icons a {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 20px;
+            margin-top: 40px;
+            text-align: center;
+            opacity: 0.7;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+        
+        .section-title {
+            position: relative;
+            margin-bottom: 50px;
+            text-align: center;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--secondary);
+            margin: 15px auto;
+            border-radius: 2px;
+        }
+        
+        /* Notification Button Styles */
+        .notification-button {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--notification-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 15px rgba(255, 82, 82, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            margin-left: 15px;
+        }
+        
+        .notification-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 82, 82, 0.4);
+        }
+        
+        .notification-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #43cea2 0%, #185a9d 100%);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 12px;
+            border: 2px solid white;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(67, 206, 162, 0.7);
+            }
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 8px rgba(67, 206, 162, 0);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(67, 206, 162, 0);
+            }
+        }
+        
+        /* Notification Panel */
+        .notification-panel {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            width: 350px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-20px);
+            transition: all 0.3s ease;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .notification-panel.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .notification-panel h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .notification-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f5f5f5;
+            display: flex;
+            align-items: center;
+        }
+        
+        .notification-item:last-child {
+            border-bottom: none;
+        }
+        
+        .notification-item i {
+            width: 40px;
+            height: 40px;
+            background: rgba(118, 75, 162, 0.1);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            color: var(--primary);
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-content h4 {
+            color: #333;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+        
+        .notification-content p {
+            color: #888;
+            font-size: 13px;
+            margin: 0;
+        }
+        
+        .time {
+            color: #bbb;
+            font-size: 12px;
+            margin-top: 3px;
+        }
+        
+        .contact-info {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+        
+        .service-box {
+            text-align: center;
+            padding: 30px 20px;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            height: 100%;
+        }
+        
+        .service-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Case Management Styles */
+        .case-management {
+            background: #f9f9f9;
+            padding: 80px 0;
+        }
+        
+        .case-box {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .case-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .case-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        /* Floating Action Button */
+        .floating-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--notification-gradient);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 6px 15px rgba(255, 82, 82, 0.4);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .floating-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(255, 82, 82, 0.6);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 80px 0;
+            }
+            
+            .display-3 {
+                font-size: 2.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2.5rem;
+            }
+            
+            .notification-panel {
+                width: 300px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-gavel me-2"></i>Justice Law Firm
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Services</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                    <li class="nav-item d-flex align-items-center">
+                        <button class="notification-button">
+                            <i class="fas fa-bell"></i>
+                            <div class="notification-badge">3</div>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel">
+        <h3>Notifications</h3>
+        
+        <div class="notification-item">
+            <i class="fas fa-calendar-check"></i>
+            <div class="notification-content">
+                <h4>Court Date Reminder</h4>
+                <p>Your hearing for Case #2456 is scheduled for tomorrow at 10:00 AM</p>
+                <div class="time">2 hours ago</div>
+            </div>
+        </div>
+        
+        <div class="notification-item">
+            <i class="fas fa-file-contract"></i>
+            <div class="notification-content">
+                <h4>Document Received</h4>
+                <p>New documents have been uploaded to your case file</p>
+                <div class="time">Yesterday</div>
+            </div>
+        </div>
+        
+        <div class="notification-item">
+            <i class="fas fa-comment-dots"></i>
+            <div class="notification-content">
+                <h4>New Message</h4>
+                <p>You have a new message from your attorney</p>
+                <div class="time">2 days ago</div>
+            </div>
+        </div>
+        
+        <div class="notification-item">
+            <i class="fas fa-money-bill-wave"></i>
+            <div class="notification-content">
+                <h4>Payment Received</h4>
+                <p>Your payment of $500 has been processed successfully</p>
+                <div class="time">3 days ago</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container text-center hero-content">
+            <span class="hero-badge"><i class="fas fa-shield-alt me-2"></i>COMMITTED TO SUCCESS</span>
+            <h1 class="display-3 fw-bold mb-4">Don't Feel Helpless<br>We Fight for Justice</h1>
+            <p class="lead mb-4">Ui enim ad minim veniam, quisi nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat la sede fede.</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <a href="#about" class="btn btn-primary btn-lg"><i class="fas fa-book-open me-2"></i>Learn About Us</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg"><i class="fas fa-phone me-2"></i>Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Management Section -->
+    <section class="case-management">
+        <div class="container">
+            <h2 class="section-title">Case Management</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="case-box">
+                        <div class="case-icon">
+                            <i class="fas fa-folder-plus"></i>
+                        </div>
+                        <h3>Add New Case</h3>
+                        <p>Create and register new legal cases with detailed information and documentation.</p>
+                        <a href="#" class="btn btn-primary mt-3"><i class="fas fa-plus me-2"></i>Add Case</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="case-box">
+                        <div class="case-icon">
+                            <i class="fas fa-edit"></i>
+                        </div>
+                        <h3>Update Case</h3>
+                        <p>Modify existing case information, add new evidence, or update case status.</p>
+                        <a href="#" class="btn btn-primary mt-3"><i class="fas fa-sync me-2"></i>Update Case</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="case-box">
+                        <div class="case-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3>Find Case</h3>
+                        <p>Search for specific cases using advanced filters, case numbers, or keywords.</p>
+                        <a href="#" class="btn btn-primary mt-3"><i class="fas fa-search me-2"></i>Find Case</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="container my-5 py-5" id="about">
+        <h2 class="section-title">About Our Firm</h2>
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <img src="https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="Law Firm" class="img-fluid rounded shadow">
+            </div>
+            <div class="col-md-6">
+                <h3>We Provide Expert Legal Services</h3>
+                <p>Our firm has been serving clients for over 25 years with dedication and excellence. We specialize in various areas of law and have a proven track record of success.</p>
+                <p>Ui enim ad minim veniam, quisi nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat la sede fede. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                <div class="d-flex gap-3 mt-4">
+                    <div class="text-center">
+                        <h4 class="text-primary">25+</h4>
+                        <p>Years Experience</p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-primary">500+</h4>
+                        <p>Cases Solved</p>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="text-primary">98%</h4>
+                        <p>Success Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="container my-5 py-5" id="services">
+        <h2 class="section-title">Our Legal Services</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h4>Criminal Law</h4>
+                    <p>Defense representation for criminal charges, from misdemeanors to serious felonies.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h4>Real Estate Law</h4>
+                    <p>Property transactions, disputes, zoning issues, and landlord-tenant matters.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Family Law</h4>
+                    <p>Divorce, child custody, adoption, and other family-related legal matters.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4>Business Law</h4>
+                    <p>Formation, contracts, compliance, and litigation for businesses of all sizes.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-file-contract"></i>
+                    </div>
+                    <h4>Estate Planning</h4>
+                    <p>Wills, trusts, probate, and estate administration services.</p>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="service-box">
+                    <div class="service-icon">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <h4>Litigation</h4>
+                    <p>Representation in court proceedings and dispute resolution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="25">0</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="500">0</div>
+                        <div class="stat-label">Cases Solved</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="98">0</div>
+                        <div class="stat-label">Success Rate</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="1500">0</div>
+                        <div class="stat-label">Happy Clients</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="container my-5 py-5" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">Get In Touch</h3>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Location</h5>
+                                <p>123 Justice Avenue, New York, NY 10001</p>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5>Phone Number</h5>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email</h5>
+                                <p>info@justicelawfirm.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-info">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Working Hours</h5>
+                                <p>Monday - Friday: 9:00 AM - 5:30 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h3 class="card-title">Send a Message</h3>
+                        <form>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Your Email">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Subject">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" rows="5" placeholder="Your Message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="footer-title">Justice Law Firm</h4>
+                    <p>Committed to providing exceptional legal services with integrity and dedication. We fight for justice and the rights of our clients.</p>
+                    <div class="social-icons mt-4">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <div class="footer-links">
+                        <a href="#home"><i class="fas fa-arrow-right me-2"></i>Home</a>
+                        <a href="#about"><i class="fas fa-arrow-right me-2"></i>About</a>
+                        <a href="#services"><i class="fas fa-arrow-right me-2"></i>Services</a>
+                        <a href="#contact"><i class="fas fa-arrow-right me-2"></i>Contact</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5 class="footer-title">Services</h5>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-arrow-right me-2"></i>Criminal Law</a>
+                        <a href="#"><i class="fas fa-arrow-right me-2"></i>Real Estate Law</a>
+                        <a href="#"><i class="fas fa-arrow-right me-2"></i>Family Law</a>
+                        <a href="#"><i class="fas fa-arrow-right me-2"></i>Business Law</a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5 class="footer-title">Contact Info</h5>
+                    <div class="footer-links">
+                        <a href="#"><i class="fas fa-map-marker-alt me-2"></i>123 Justice Avenue, NY</a>
+                        <a href="tel:+15551234567"><i class="fas fa-phone me-2"></i>+1 (555) 123-4567</a>
+                        <a href="mailto:info@justicelawfirm.com"><i class="fas fa-envelope me-2"></i>info@justicelawfirm.com</a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 Justice Law Firm. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <a href="#contact" class="floating-button">
+        <i class="fas fa-phone"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Counter animation for stats
+        document.addEventListener('DOMContentLoaded', function() {
+            const counters = document.querySelectorAll('.stat-number');
+            const speed = 200;
+            
+            counters.forEach(counter => {
+                const target = +counter.getAttribute('data-count');
+                const count = +counter.innerText;
+                const increment = Math.ceil(target / speed);
+                
+                const updateCount = () => {
+                    if (count < target) {
+                        counter.innerText = Math.min(count + increment, target);
+                        setTimeout(updateCount, 1);
+                    }
+                };
+                
+                updateCount();
+            });
+            
+            // Notification button functionality
+            const notificationButton = document.querySelector('.notification-button');
+            const notificationPanel = document.querySelector('.notification-panel');
+            
+            notificationButton.addEventListener('click', function(e) {
+                e.stopPropagation();
+                notificationPanel.classList.toggle('active');
+            });
+            
+            // Close notifications when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!notificationButton.contains(e.target) && !notificationPanel.contains(e.target)) {
+                    notificationPanel.classList.remove('active');
+                }
+            });
+            
+            // Prevent closing when clicking on the notification panel
+            notificationPanel.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+</body>
+</html>

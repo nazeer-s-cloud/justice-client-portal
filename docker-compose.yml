@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  # 1. Database Service (MongoDB)
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db # Persist data outside the container
+    environment:
+      # Simple database name for the demo
+      MONGO_INITDB_DATABASE: justiceDB
+
+  # 2. Backend API Service (Node.js/Express) - We will create files for this
+  api:
+    build: 
+      context: ./backend # Dockerfile for the API will be here
+    container_name: justice-api
+    ports:
+      - "3000:3000" # API runs on port 3000
+    environment:
+      # Connection string for the API to connect to MongoDB
+      MONGO_URI: mongodb://mongodb:27017/justiceDB 
+    depends_on:
+      - mongodb
+
+  # 3. Frontend Web Service (Nginx) - Your existing container
+  frontend:
+    build: 
+      context: . # Uses the Dockerfile you already created
+    container_name: justice-frontend
+    ports:
+      - "8080:80" # Access on http://localhost:8080
+    depends_on:
+      - api # Ensure API is ready before the frontend starts
+
+volumes:
+  mongo_data:

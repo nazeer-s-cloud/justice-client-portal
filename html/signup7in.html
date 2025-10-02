@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Justice Law Firm - Client Portal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1a237e;
+      --primary-dark: #0d1442;
+      --secondary: #c8a951;
+      --secondary-light: #e0c879;
+      --dark: #121212;
+      --light: #f8f9fa;
+      --accent: #3949ab;
+      --accent-light: #5c6bc0;
+    }
+    
+    /* Enable smooth scrolling for the entire HTML document */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Montserrat', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+      padding: 20px;
+      position: relative;
+      overflow-x: hidden;
+      /* Add subtle background image */
+      background-image: 
+        url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
+      background-size: cover;
+      background-blend-mode: overlay;
+      background-position: center;
+    }
+    
+    .particle {
+      position: absolute;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 1;
+    }
+    
+    .auth-container {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 20px;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      width: 1000px;
+      max-width: 100%;
+      min-height: 600px;
+      display: flex;
+      position: relative;
+      z-index: 10;
+      backdrop-filter: blur(5px);
+      transition: transform 0.5s ease, box-shadow 0.5s ease;
+    }
+    
+    .auth-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2);
+    }
+    
+    .form-box {
+      flex: 1;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 30px;
+      color: var(--primary);
+      font-size: 24px;
+      font-weight: 700;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo:hover {
+      transform: scale(1.02);
+    }
+    
+    h1 {
+      font-family: 'Playfair Display', serif;
+      color: var(--primary);
+      margin-bottom: 20px;
+      position: relative;
+      display: inline-block;
+    }
+    
+    h1::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 50px;
+      height: 3px;
+      background: var(--secondary);
+      transition: width 0.5s ease;
+    }
+    
+    .form-box:hover h1::after {
+      width: 100px;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+    
+    label {
+      font-weight: 600;
+      margin-bottom: 5px;
+      color: #333;
+      display: block;
+      transition: transform 0.3s ease, color 0.3s ease;
+      transform-origin: left;
+    }
+    
+    .form-group:focus-within label {
+      color: var(--primary);
+      transform: translateY(-5px) scale(0.95);
+    }
+    
+    input {
+      width: 100%;
+      padding: 15px 20px;
+      padding-left: 50px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      transition: all 0.3s;
+      font-size: 16px;
+      background: rgba(248, 249, 250, 0.8);
+    }
+    
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 15px rgba(26, 35, 126, 0.2);
+      background: #fff;
+      transform: translateY(-2px);
+    }
+    
+    .form-group i {
+      position: absolute;
+      left: 15px;
+      top: 43px;
+      color: var(--primary);
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    
+    .form-group:focus-within i {
+      color: var(--accent);
+      transform: scale(1.1);
+    }
+    
+    .btn-primary {
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      border: none;
+      padding: 15px 30px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: all 0.3s;
+      width: 100%;
+      color: white;
+      font-size: 16px;
+      margin-top: 10px;
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--accent), var(--primary));
+      transition: all 0.6s;
+      z-index: -1;
+    }
+    
+    .btn-primary:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 25px rgba(26, 35, 126, 0.3);
+    }
+    
+    .btn-primary:hover::before {
+      left: 0;
+    }
+    
+    .toggle-panel {
+      flex: 1;
+      background: linear-gradient(135deg, rgba(26, 35, 126, 0.85), rgba(13, 20, 66, 0.9)), 
+                  url('https://images.unsplash.com/photo-1589391886645-d51941baf7fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      flex-direction: column;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .toggle-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 5px;
+      background: linear-gradient(90deg, var(--secondary), var(--secondary-light), var(--secondary));
+      background-size: 200% 100%;
+      animation: shimmer 3s infinite linear;
+    }
+    
+    .toggle-panel::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+      transform: rotate(30deg);
+      animation: lightEffect 15s infinite linear;
+    }
+    
+    .toggle-panel h2 {
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 15px;
+      font-size: 28px;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .toggle-panel p {
+      position: relative;
+      z-index: 2;
+    }
+    
+    .toggle-btn {
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      padding: 12px 30px;
+      border-radius: 8px;
+      margin-top: 20px;
+      transition: all 0.3s;
+      font-weight: 600;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      z-index: 2;
+    }
+    
+    .toggle-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: width 0.3s;
+      z-index: -1;
+    }
+    
+    .toggle-btn:hover::before {
+      width: 100%;
+    }
+    
+    .toggle-btn:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .badge {
+      background: var(--secondary);
+      color: var(--dark);
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 20px;
+      font-size: 14px;
+      position: relative;
+      z-index: 2;
+      animation: pulse 2s infinite;
+    }
+    
+    .feature-list {
+      text-align: left;
+      margin: 25px 0;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .feature-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+      transition: transform 0.3s ease;
+    }
+    
+    .feature-item:hover {
+      transform: translateX(5px);
+    }
+    
+    .feature-item i {
+      margin-right: 10px;
+      color: var(--secondary);
+      font-size: 18px;
+    }
+    
+    .social-icons {
+      margin: 20px 0;
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    
+    .social-icons a {
+      border: 1px solid #ddd;
+      border-radius: 50%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      height: 45px;
+      width: 45px;
+      color: #555;
+      text-decoration: none;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .social-icons a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      opacity: 0;
+      transition: opacity 0.3s;
+      z-index: -1;
+    }
+    
+    .social-icons a:hover {
+      border-color: var(--primary);
+      color: #fff;
+      transform: translateY(-5px) rotate(5deg);
+    }
+    
+    .social-icons a:hover::before {
+      opacity: 1;
+    }
+    
+    .auth-container.sign-up-active .sign-in {
+      transform: translateX(-100%);
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+    }
+    
+    .auth-container.sign-up-active .sign-up {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    
+    .auth-container:not(.sign-up-active) .sign-up {
+      transform: translateX(100%);
+      opacity: 0;
+      position: absolute;
+      width: 100%;
+    }
+    
+    .auth-container:not(.sign-up-active) .sign-in {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    
+    .sign-in, .sign-up {
+      transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out;
+    }
+    
+    /* Animations */
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg) scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translate(20px, 20px) rotate(180deg) scale(1.2);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg) scale(1);
+        opacity: 0.5;
+      }
+    }
+    
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(200, 169, 81, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(200, 169, 81, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(200, 169, 81, 0);
+      }
+    }
+    
+    @keyframes shimmer {
+      0% {
+        background-position: -200% 0;
+      }
+      100% {
+        background-position: 200% 0;
+      }
+    }
+    
+    @keyframes lightEffect {
+      0% {
+        transform: rotate(30deg) translateX(-100%);
+      }
+      100% {
+        transform: rotate(30deg) translateX(100%);
+      }
+    }
+    
+    /* Legal document background pattern */
+    .legal-pattern {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      background-image: 
+        linear-gradient(90deg, transparent 79px, #ababab 79px, #ababab 81px, transparent 81px),
+        linear-gradient(#eee 1px, transparent 1px);
+      background-size: 100% 100%, 15px 15px;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Mobile Navigation Toggle */
+    .mobile-nav-toggle {
+      display: none;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 992px) {
+      .auth-container {
+        flex-direction: column;
+        min-height: auto;
+        max-width: 90%;
+      }
+      
+      .toggle-panel {
+        order: -1;
+        padding: 30px 20px;
+        min-height: 300px;
+      }
+      
+      .form-box {
+        padding: 30px 20px;
+      }
+      
+      .logo {
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+      
+      .toggle-panel h2 {
+        font-size: 22px;
+      }
+      
+      .feature-list {
+        margin: 15px 0;
+      }
+      
+      .feature-item {
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      
+      input {
+        padding: 12px 15px;
+        padding-left: 45px;
+        font-size: 14px;
+      }
+      
+      .form-group i {
+        top: 38px;
+      }
+      
+      .btn-primary, .toggle-btn {
+        padding: 12px 20px;
+        font-size: 14px;
+      }
+      
+      .social-icons a {
+        height: 40px;
+        width: 40px;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      body {
+        padding: 10px;
+      }
+      
+      .auth-container {
+        max-width: 100%;
+        border-radius: 15px;
+      }
+      
+      .toggle-panel {
+        min-height: 250px;
+        padding: 20px 15px;
+      }
+      
+      .form-box {
+        padding: 25px 15px;
+      }
+      
+      .logo {
+        font-size: 18px;
+      }
+      
+      h1 {
+        font-size: 22px;
+      }
+      
+      .toggle-panel h2 {
+        font-size: 20px;
+      }
+      
+      .badge {
+        font-size: 12px;
+        padding: 6px 15px;
+      }
+      
+      .feature-item {
+        font-size: 13px;
+      }
+      
+      .feature-item i {
+        font-size: 16px;
+      }
+      
+      .toggle-btn {
+        margin-top: 15px;
+      }
+    }
+    
+    /* Landscape mode for mobile */
+    @media (max-height: 600px) and (orientation: landscape) {
+      body {
+        padding: 10px;
+        align-items: flex-start;
+        min-height: auto;
+        height: auto;
+      }
+      
+      .auth-container {
+        margin: 20px 0;
+        min-height: auto;
+      }
+      
+      .form-box {
+        padding: 20px;
+      }
+      
+      .toggle-panel {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="legal-pattern"></div>
+  
+  <button class="mobile-nav-toggle" id="mobileNavToggle">
+    <i class="fas fa-bars"></i>
+  </button>
+  
+  <div class="auth-container" id="authContainer">
+    <div class="form-box sign-in">
+      <div class="logo">
+        <i class="fas fa-gavel me-2"></i>Justice Law Firm
+      </div>
+      <h1>Sign In</h1>
+      <form id="signinForm">
+        <div class="form-group">
+          <label for="signin-email">Email</label>
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="signin-email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="signin-password">Password</label>
+          <i class="fas fa-lock"></i>
+          <input type="password" id="signin-password" placeholder="Enter your password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <div id="login-message" class="mt-3" style="font-weight: 600; text-align: center;"></div>
+      </form>
+      
+      <div class="social-icons">
+        <a href="#" title="Sign in with Google"><i class="fab fa-google"></i></a>
+        <a href="#" title="Sign in with Facebook"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+
+    <div class="form-box sign-up">
+      <div class="logo">
+        <i class="fas fa-gavel me-2"></i>Justice Law Firm
+      </div>
+      <h1>Create Account</h1>
+      <form id="signupForm">
+        <div class="form-group">
+          <label for="signup-email">Email</label>
+          <i class="fas fa-envelope"></i>
+          <input type="email" id="signup-email" placeholder="Enter your email" required>
+        </div>
+        <div class="form-group">
+          <label for="signup-password">Password</label>
+          <i class="fas fa-lock"></i>
+          <input type="password" id="signup-password" placeholder="Create a password" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Sign Up</button>
+        <div id="signup-message" class="mt-3" style="font-weight: 600; text-align: center;"></div>
+      </form>
+      
+      <div class="social-icons">
+        <a href="#" title="Sign up with Google"><i class="fab fa-google"></i></a>
+        <a href="#" title="Sign up with Facebook"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+
+    <div class="toggle-panel">
+      <div class="legal-pattern"></div>
+      <div id="toggleContent">
+        <span class="badge"><i class="fas fa-shield-alt me-2"></i>COMMITTED TO SUCCESS</span>
+        <h2>Welcome Back!</h2>
+        <p>If you already have an account, just sign in.</p>
+        
+        <div class="feature-list">
+          <div class="feature-item">
+            <i class="fas fa-lock"></i>
+            <span>Secure & Confidential</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-clock"></i>
+            <span>24/7 Access to Your Cases</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-comments"></i>
+            <span>Direct Communication</span>
+          </div>
+        </div>
+        
+        <button class="toggle-btn" onclick="toggleAuth()">Create Account</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const authContainer = document.getElementById('authContainer');
+    const toggleContent = document.getElementById('toggleContent');
+    const mobileNavToggle = document.getElementById('mobileNavToggle');
+    const signInForm = document.getElementById('signinForm');
+    const signUpForm = document.getElementById('signupForm');
+    const loginMessage = document.getElementById('login-message');
+    const signupMessage = document.getElementById('signup-message');
+
+    function toggleAuth() {
+      authContainer.classList.toggle('sign-up-active');
+      if (authContainer.classList.contains('sign-up-active')) {
+        toggleContent.innerHTML = `
+          <span class="badge"><i class="fas fa-shield-alt me-2"></i>COMMITTED TO SUCCESS</span>
+          <h2>New Here?</h2>
+          <p>Create an account to access our client portal</p>
+          
+          <div class="feature-list">
+            <div class="feature-item">
+              <i class="fas fa-briefcase"></i>
+              <span>Case Management</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-calendar"></i>
+              <span>Schedule Consultations</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-file-contract"></i>
+              <span>Document Access</span>
+            </div>
+          </div>
+          
+          <button class="toggle-btn" onclick="toggleAuth()">Sign In</button>
+        `;
+      } else {
+        toggleContent.innerHTML = `
+          <span class="badge"><i class="fas fa-shield-alt me-2"></i>COMMITTED TO SUCCESS</span>
+          <h2>Welcome Back!</h2>
+          <p>If you already have an account, just sign in.</p>
+          
+          <div class="feature-list">
+            <div class="feature-item">
+              <i class="fas fa-lock"></i>
+              <span>Secure & Confidential</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-clock"></i>
+              <span>24/7 Access to Your Cases</span>
+            </div>
+            <div class="feature-item">
+              <i class="fas fa-comments"></i>
+              <span>Direct Communication</span>
+            </div>
+          </div>
+          
+          <button class="toggle-btn" onclick="toggleAuth()">Create Account</button>
+        `;
+      }
+      // Clear messages when switching forms
+      loginMessage.textContent = '';
+      loginMessage.style.color = '';
+      if (signupMessage) {
+        signupMessage.textContent = '';
+        signupMessage.style.color = '';
+      }
+    }
+    
+    // Mobile navigation toggle
+    mobileNavToggle.addEventListener('click', function() {
+      const isExpanded = authContainer.style.height === 'auto';
+      
+      if (isExpanded) {
+        authContainer.style.height = '';
+        mobileNavToggle.innerHTML = '<i class="fas fa-bars"></i>';
+      } else {
+        authContainer.style.height = 'auto';
+        mobileNavToggle.innerHTML = '<i class="fas fa-times"></i>';
+      }
+    });
+    
+    // Create background particles
+    function createParticles() {
+      const particles = 100;
+      const container = document.body;
+      
+      for (let i = 0; i < particles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        const size = Math.random() * 15 + 2;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const delay = Math.random() * 5;
+        const duration = Math.random() * 15 + 10;
+        const blur = Math.random() * 5;
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}vw`;
+        particle.style.top = `${posY}vh`;
+        particle.style.filter = `blur(${blur}px)`;
+        particle.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+        
+        container.appendChild(particle);
+      }
+    }
+    
+    // Add form validation and interaction
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input');
+      
+      inputs.forEach(input => {
+        // Add focus effect
+        input.addEventListener('focus', function() {
+          this.parentElement.classList.add('focused');
+        });
+        
+        input.addEventListener('blur', function() {
+          if (this.value === '') {
+            this.parentElement.classList.remove('focused');
+          }
+        });
+        
+        // Check if input has value on page load (for browser autofill)
+        if (input.value !== '') {
+          input.parentElement.classList.add('focused');
+        }
+      });
+      
+      // ==========================================================
+      // --- NEW LOGIC FOR SIGN-IN AND REDIRECTION (API CALLS) ---
+      // ==========================================================
+      
+      // API Endpoint for your backend (must match the port mapped in docker-compose.yml)
+      const API_URL = 'http://localhost:3000/api'; 
+      
+      signInForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); 
+        
+        const email = document.getElementById('signin-email').value.trim();
+        const password = document.getElementById('signin-password').value.trim();
+        const submitBtn = this.querySelector('button[type="submit"]');
+        
+        const originalText = submitBtn.textContent;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Checking...';
+        submitBtn.disabled = true;
+        loginMessage.textContent = ''; 
+        loginMessage.style.color = '';
+
+        try {
+          const response = await fetch(`${API_URL}/login`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            // SUCCESS: Display message and Redirect
+            loginMessage.textContent = data.msg; 
+            loginMessage.style.color = 'green';
+            
+            // Redirect to the frontend page after a short delay
+            setTimeout(() => {
+              window.location.href = 'front.html';
+            }, 1000); // 1 second delay for message visibility
+
+          } else {
+            // FAILURE: Display error message
+            loginMessage.textContent = data.msg || 'Login failed. Check server status.';
+            loginMessage.style.color = 'red';
+          }
+
+        } catch (error) {
+          // Handle network errors (e.g., if the backend container is down)
+          loginMessage.textContent = 'Error: Could not connect to the authentication server.';
+          loginMessage.style.color = 'red';
+        } finally {
+          submitBtn.textContent = originalText;
+          submitBtn.disabled = false;
+        }
+      });
+
+
+      // Logic for Sign Up Form (to register new users in the database)
+      if (signUpForm) {
+        signUpForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          const email = document.getElementById('signup-email').value.trim();
+          const password = document.getElementById('signup-password').value.trim();
+          const submitBtn = this.querySelector('button[type="submit"]');
+          
+          const originalText = submitBtn.textContent;
+          submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+          submitBtn.disabled = true;
+          signupMessage.textContent = '';
+          signupMessage.style.color = '';
+
+          try {
+            const response = await fetch(`${API_URL}/signup`, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ email, password })
+            });
+        
+            const data = await response.json();
+            
+            if (response.ok) {
+              signupMessage.textContent = `SUCCESS: ${data.msg}. Switching to Sign In.`;
+              signupMessage.style.color = 'green';
+              
+              // Automatically switch to Sign In tab after successful registration
+              setTimeout(() => {
+                  toggleAuth(); 
+                  document.getElementById('signin-email').value = email;
+              }, 2000); 
+            } else {
+              signupMessage.textContent = data.msg || 'Registration failed.';
+              signupMessage.style.color = 'red';
+            }
+
+          } catch (error) {
+            // Handle network errors
+            signupMessage.textContent = 'Error: Could not reach the authentication server.';
+            signupMessage.style.color = 'red';
+          } finally {
+            submitBtn.textContent = originalText;
+            submitBtn.disabled = false;
+          }
+        });
+      }
+
+      // Show mobile nav toggle on small screens
+      function checkScreenSize() {
+        if (window.innerWidth <= 992) {
+          mobileNavToggle.style.display = 'block';
+          authContainer.style.height = 'auto';
+        } else {
+          mobileNavToggle.style.display = 'none';
+          authContainer.style.height = '';
+        }
+      }
+      
+      // Initial check
+      checkScreenSize();
+      
+      // Listen for window resize
+      window.addEventListener('resize', checkScreenSize);
+    });
+    
+    // Initialize particles
+    createParticles();
+  </script>
+</body>
+</html>
