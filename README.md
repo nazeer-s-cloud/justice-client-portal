@@ -97,4 +97,38 @@ Usage Instructions
 
     Redirection: Upon successful authentication via the Node.js API and MongoDB, the frontend will automatically redirect you to front.html.
 
-http://localhost:8080/signup7in.html
+Key DevOps Concepts Demonstrated
+
+This project showcases fundamental DevOps skills:
+
+    Containerization: Isolating the frontend (Nginx), backend (Node), and database (Mongo) into separate, portable containers.
+
+    Orchestration: Using docker-compose.yml to define and manage the lifecycle of the multi-container application and its network.
+
+    Microservices: Employing a dedicated API service to handle the security and business logic separate from the presentation layer.
+
+    Internal Networking: The Node.js API resolves the database using its service name (mongodb) within the Docker network, not localhost.
+
+Cleanup
+
+To stop and remove all containers, networks, and volumes created by Docker Compose, run:
+Bash
+
+docker compose down -v
+
+    -v: Removes the Docker volume, including the database data (mongo_data). Use with caution, as this wipes all registered user accounts.
+
+⚙️ Technologies Used
+
+    Frontend: HTML5, CSS3, Bootstrap, Vanilla JavaScript
+
+    Web Server: Nginx (via nginx:alpine)
+
+    Backend: Node.js, Express
+
+    Database: MongoDB
+
+    Security: bcryptjs for password hashing
+
+    Deployment: Docker, Docker Compose
+
